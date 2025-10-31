@@ -1,33 +1,93 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from '../context/LanguageContext';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const Portfolio = () => {
   useScrollAnimation();
-  const { t } = useTranslation();
+  const { language } = useLanguage();
+
+  // Переводы для Portfolio
+  const translations = {
+    ru: {
+      sectionTitle: 'Портфолио',
+      title: 'Наши кейсы',
+      subtitle: 'Реализованные проекты, которые помогают бизнесу расти и достигают поставленных целей',
+      projects: {
+        ecommerce: {
+          title: 'Интернет-магазин',
+          description: 'Полнофункциональный онлайн-магазин с системой управления заказами'
+        },
+        portal: {
+          title: 'Корпоративный портал',
+          description: 'Внутренняя система для управления бизнес-процессами компании'
+        },
+        mobile: {
+          title: 'Мобильное приложение',
+          description: 'Кроссплатформенное приложение для iOS и Android'
+        },
+        booking: {
+          title: 'Система бронирования',
+          description: 'Онлайн-платформа для бронирования авиабилетов и отелей'
+        }
+      },
+      viewCase: 'Смотреть кейс',
+      completed: 'Завершен',
+      details: 'Подробнее',
+      showAll: 'Показать все проекты'
+    },
+    en: {
+      sectionTitle: 'Portfolio',
+      title: 'Our Cases',
+      subtitle: 'Completed projects that help businesses grow and achieve their goals',
+      projects: {
+        ecommerce: {
+          title: 'E-commerce Store',
+          description: 'Full-featured online store with order management system'
+        },
+        portal: {
+          title: 'Corporate Portal',
+          description: 'Internal system for managing company business processes'
+        },
+        mobile: {
+          title: 'Mobile Application',
+          description: 'Cross-platform application for iOS and Android'
+        },
+        booking: {
+          title: 'Booking System',
+          description: 'Online platform for booking flights and hotels'
+        }
+      },
+      viewCase: 'View Case',
+      completed: 'Completed',
+      details: 'Details',
+      showAll: 'Show All Projects'
+    }
+  };
+
+  const t = translations[language];
 
   const projects = [
     {
-      title: t('portfolio.projects.ecommerce.title', 'Интернет-магазин'),
-      description: t('portfolio.projects.ecommerce.description', 'Полнофункциональный онлайн-магазин с системой управления заказами'),
+      title: t.projects.ecommerce.title,
+      description: t.projects.ecommerce.description,
       image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
       tags: ['E-commerce', 'React', 'Node.js']
     },
     {
-      title: t('portfolio.projects.portal.title', 'Корпоративный портал'),
-      description: t('portfolio.projects.portal.description', 'Внутренняя система для управления бизнес-процессами компании'),
+      title: t.projects.portal.title,
+      description: t.projects.portal.description,
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
       tags: ['Dashboard', 'Vue', 'MongoDB']
     },
     {
-      title: t('portfolio.projects.mobile.title', 'Мобильное приложение'),
-      description: t('portfolio.projects.mobile.description', 'Кроссплатформенное приложение для iOS и Android'),
+      title: t.projects.mobile.title,
+      description: t.projects.mobile.description,
       image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
       tags: ['React Native', 'Firebase']
     },
     {
-      title: t('portfolio.projects.booking.title', 'Система бронирования'),
-      description: t('portfolio.projects.booking.description', 'Онлайн-платформа для бронирования авиабилетов и отелей'),
+      title: t.projects.booking.title,
+      description: t.projects.booking.description,
       image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
       tags: ['Booking', 'Payment', 'API']
     }
@@ -44,13 +104,13 @@ const Portfolio = () => {
         {/* Заголовок с анимацией */}
         <div className="scroll-animate opacity-0 translate-y-8 transition-all duration-700 text-center mb-16">
           <span className="text-blue-600 dark:text-blue-400 text-sm font-semibold tracking-wider uppercase mb-2 block">
-            {t('portfolio.sectionTitle', 'Портфолио')}
+            {t.sectionTitle}
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            {t('portfolio.title', 'Наши кейсы')}
+            {t.title}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            {t('portfolio.subtitle', 'Реализованные проекты, которые помогают бизнесу расти и достигают поставленных целей')}
+            {t.subtitle}
           </p>
         </div>
         
@@ -78,7 +138,7 @@ const Portfolio = () => {
                 {/* Наложение при hover */}
                 <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/10 transition-all duration-500 flex items-center justify-center">
                   <button className="opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 bg-white/90 dark:bg-gray-900/90 text-gray-900 dark:text-white px-4 py-2 rounded-lg font-semibold text-sm backdrop-blur-sm">
-                    {t('portfolio.viewCase', 'Смотреть кейс')}
+                    {t.viewCase}
                   </button>
                 </div>
               </div>
@@ -108,10 +168,10 @@ const Portfolio = () => {
                 {/* Ссылка на проект */}
                 <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-700">
                   <span className="text-xs text-gray-500 dark:text-gray-400">
-                    {t('portfolio.completed', 'Завершен')}
+                    {t.completed}
                   </span>
                   <button className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm font-semibold transition-colors duration-300 flex items-center gap-1">
-                    {t('portfolio.details', 'Подробнее')}
+                    {t.details}
                     <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -120,13 +180,6 @@ const Portfolio = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Кнопка "Показать еще" */}
-        <div className="scroll-animate opacity-0 translate-y-8 transition-all duration-700 text-center mt-12">
-          <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-full hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
-            {t('portfolio.showAll', 'Показать все проекты')}
-          </button>
         </div>
       </div>
     </section>

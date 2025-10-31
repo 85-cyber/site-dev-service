@@ -27,13 +27,15 @@ function App() {
 
   return (
     <LanguageProvider>
-      <div className="App">
+      <div className="App min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
         <ThemeLanguageSwitcher />
         <Header />
-        <Hero /> 
-        <Services />
-        <Portfolio />
-        <Contact />
+        <main>
+          <Hero />
+          <Services />
+          <Portfolio />
+          <Contact />
+        </main>
         <Footer />
         <ScrollToTop />
       </div>

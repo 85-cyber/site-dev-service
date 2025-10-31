@@ -3,17 +3,35 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useLanguage } from '../context/LanguageContext';
 
 const Services = () => {
-  const [activeService, setActiveService] = useState(null);
+  const [activeService, setActiveService] = useState(1); // По умолчанию открыта веб-разработка
   useScrollAnimation();
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
+
+  // Объект переводов для Services
+  const translations = {
+    ru: {
+      ourServices: 'Наши услуги',
+      servicesDescription: 'Комплексные решения для цифрового развития вашего бизнеса',
+      learnMore: 'Узнать больше',
+      webDevelopment: 'Веб-разработка',
+      webDevelopmentDesc: 'Современные сайты и веб-приложения на React, Next.js'
+    },
+    en: {
+      ourServices: 'Our Services',
+      servicesDescription: 'Comprehensive solutions for your business digital development',
+      learnMore: 'Learn More',
+      webDevelopment: 'Web Development',
+      webDevelopmentDesc: 'Modern websites and web applications on React, Next.js'
+    }
+  };
+
+  const t = translations[language];
 
   const services = [
     {
       id: 1,
-      title: language === 'ru' ? "Веб-разработка" : "Web Development",
-      description: language === 'ru' 
-        ? "Современные сайты и веб-приложения на React, Next.js" 
-        : "Modern websites and web applications on React, Next.js",
+      title: t.webDevelopment,
+      description: t.webDevelopmentDesc,
       image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
       features: language === 'ru' 
         ? ["SPA/SSR приложения", "API интеграция", "Оптимизация производительности", "PWA"]
@@ -72,98 +90,118 @@ const Services = () => {
     }
   };
 
+  const activeServiceData = services.find(service => service.id === activeService);
+
   return (
-    <section id="services" className="py-2 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900/20">
+    <section id="services" className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900/20">
       <div className="container mx-auto px-4">
         
-        {/* Заголовок с анимацией */}
-        <div className="scroll-animate opacity-0 text-center mb-4">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            {t('ourServices')}
+        {/* Заголовок раздела */}
+        <div className="scroll-animate opacity-0 text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            {t.ourServices}
           </h2>
-          <p className="text-sm text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            {t('servicesDescription')}
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            {t.servicesDescription}
           </p>
         </div>
 
-        {/* Сетка услуг */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-3 max-w-7xl mx-auto">
-          {services.map((service, index) => (
-            <div
-              key={service.id}
-              className={`scroll-animate opacity-0 relative group cursor-pointer transform transition-all duration-300 ${
-                activeService === service.id 
-                  ? 'scale-102 -translate-y-1' 
-                  : 'hover:scale-101'
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
-              onMouseEnter={() => setActiveService(service.id)}
-              onMouseLeave={() => setActiveService(null)}
-              onClick={scrollToContact}
-            >
-              {/* Основная карточка */}
-              <div className={`bg-white dark:bg-gray-800 rounded-xl p-3 shadow-lg border border-gray-200 dark:border-gray-700 relative overflow-hidden h-full ${
-                activeService === service.id ? 'ring-1 ring-opacity-50' : ''
-              } ring-${service.gradient.split('-')[1]}-500`}>
-                
-                {/* Градиентный фон */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.bgGradient} dark:opacity-10 opacity-30 rounded-xl`}></div>
-                
-                {/* Фотография */}
-                <div className="relative mb-2 overflow-hidden rounded-lg">
-                  <img 
-                    src={service.image} 
-                    alt={service.title}
-                    className={`w-full h-32 object-cover transform transition-all duration-300 ${
-                      activeService === service.id ? 'scale-105' : 'group-hover:scale-102'
-                    }`}
-                  />
-                  {/* Градиентный оверлей */}
-                  <div className={`absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-50 rounded-lg`}></div>
-                  
-                  {/* Иконка поверх фото */}
-                  <div className={`absolute top-2 right-2 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center transform transition-all duration-200 ${
-                    activeService === service.id ? 'scale-105 rotate-6' : 'group-hover:scale-105'
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          
+          {/* Левая колонка - список услуг */}
+          <div className="lg:col-span-1">
+            <div className="space-y-4">
+              {services.map((service, index) => (
+                <div
+                  key={service.id}
+                  className={`scroll-animate opacity-0 p-6 rounded-xl cursor-pointer transform transition-all duration-300 ${
+                    activeService === service.id 
+                      ? 'bg-white dark:bg-gray-800 shadow-lg border-l-4 scale-105' 
+                      : 'bg-gray-50 dark:bg-gray-700/50 hover:bg-white dark:hover:bg-gray-700 hover:shadow-md'
+                  } border-l-${service.gradient.split('-')[1]}-500`}
+                  style={{ 
+                    transitionDelay: `${index * 100}ms`,
+                    borderLeftColor: activeService === service.id ? `var(--color-${service.gradient.split('-')[1]}-500)` : 'transparent'
+                  }}
+                  onClick={() => setActiveService(service.id)}
+                >
+                  <h3 className={`text-xl font-bold ${
+                    activeService === service.id 
+                      ? `bg-gradient-to-r ${service.gradient} bg-clip-text text-transparent`
+                      : 'text-gray-700 dark:text-gray-300'
                   }`}>
-                    <span className="text-lg">
-                      {service.id === 1 && "🌐"}
-                      {service.id === 2 && "🎨"}
-                      {service.id === 3 && "🤖"}
-                      {service.id === 4 && "📱"}
-                    </span>
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm">
+                    {service.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Правая колонка - детали выбранной услуги */}
+          <div className="lg:col-span-2">
+            {activeServiceData && (
+              <div className="scroll-animate opacity-0 bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+                
+                {/* Заголовок услуги */}
+                <div className={`bg-gradient-to-r ${activeServiceData.gradient} p-8 text-white`}>
+                  <h3 className="text-3xl md:text-4xl font-bold mb-4">
+                    {activeServiceData.title}
+                  </h3>
+                  <p className="text-xl opacity-90">
+                    {activeServiceData.description}
+                  </p>
+                </div>
+
+                {/* Контент услуги */}
+                <div className="p-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    {/* Особенности */}
+                    <div>
+                      <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                        {language === 'ru' ? 'Что мы предлагаем:' : 'What we offer:'}
+                      </h4>
+                      <ul className="space-y-3">
+                        {activeServiceData.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-center text-gray-700 dark:text-gray-300">
+                            <span className={`w-2 h-2 bg-gradient-to-r ${activeServiceData.gradient} rounded-full mr-3`}></span>
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Изображение */}
+                    <div className="relative">
+                      <img 
+                        src={activeServiceData.image} 
+                        alt={activeServiceData.title}
+                        className="w-full h-64 object-cover rounded-lg shadow-md"
+                      />
+                      <div className={`absolute inset-0 bg-gradient-to-t from-${activeServiceData.gradient.split('-')[1]}-500/20 to-transparent rounded-lg`}></div>
+                    </div>
+
+                  </div>
+
+                  {/* Кнопка */}
+                  <div className="mt-8 text-center">
+                    <button 
+                      onClick={scrollToContact}
+                      className={`bg-gradient-to-r ${activeServiceData.gradient} text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-200 text-lg`}
+                    >
+                      {t.learnMore}
+                    </button>
                   </div>
                 </div>
-
-                {/* Заголовок */}
-                <h3 className={`text-base font-bold bg-gradient-to-r ${service.gradient} bg-clip-text text-transparent mb-1`}>
-                  {service.title}
-                </h3>
-
-                {/* Описание */}
-                <p className="text-gray-600 dark:text-gray-300 mb-2 leading-relaxed text-xs">
-                  {service.description}
-                </p>
-
-                {/* Список фич */}
-                <ul className="space-y-1 mb-2">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center text-gray-700 dark:text-gray-300 text-xs">
-                      <span className={`w-1 h-1 bg-gradient-to-r ${service.gradient} rounded-full mr-1`}></span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Кнопка */}
-                <div 
-                  className={`w-full bg-gradient-to-r ${service.gradient} text-white py-1 px-2 rounded-lg font-semibold hover:shadow-md transform hover:scale-102 transition-all duration-200 border border-transparent hover:border-white/20 text-center cursor-pointer text-xs`}
-                >
-                  {t('learnMore')}
-                </div>
               </div>
-            </div>
-          ))}
+            )}
+          </div>
+
         </div>
+
       </div>
     </section>
   );
