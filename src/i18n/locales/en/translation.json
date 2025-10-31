@@ -1,0 +1,104 @@
+{
+  "header": {
+    "services": "Services",
+    "technologies": "Technologies",
+    "portfolio": "Portfolio",
+    "process": "Process",
+    "reviews": "Reviews"
+  },
+  "hero": {
+    "title": "We help launch and grow business in digital environment",
+    "subtitle": "We create modern and effective websites that deliver results",
+    "ctaPrimary": "Discuss Project",
+    "ctaSecondary": "View Works",
+    "imageAlt": "Web Development",
+    "scrollHint": "Scroll down",
+    "stats": {
+      "projects": "Completed projects",
+      "experience": "Years of experience",
+      "clients": "Satisfied clients",
+      "support": "Support"
+    }
+  },
+  "portfolio": {
+    "sectionTitle": "Portfolio",
+    "title": "Our Cases",
+    "subtitle": "Completed projects that help businesses grow and achieve their goals",
+    "viewCase": "View Case",
+    "completed": "Completed",
+    "details": "Details",
+    "showAll": "Show All Projects",
+    "projects": {
+      "ecommerce": {
+        "title": "E-commerce Store",
+        "description": "Full-featured online store with order management system"
+      },
+      "portal": {
+        "title": "Corporate Portal",
+        "description": "Internal system for managing company business processes"
+      },
+      "mobile": {
+        "title": "Mobile Application",
+        "description": "Cross-platform application for iOS and Android"
+      },
+      "booking": {
+        "title": "Booking System",
+        "description": "Online platform for booking flights and hotels"
+      }
+    }
+  },
+  "contact": {
+    "title": "Ready to discuss your project?",
+    "subtitle": "Contact us for a free consultation",
+    "form": {
+      "title": "Submit Application",
+      "name": "Your Name",
+      "namePlaceholder": "John Smith",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+1 (555) 123-4567",
+      "email": "Email",
+      "emailPlaceholder": "hello@example.com",
+      "message": "About Project",
+      "messagePlaceholder": "Tell us about your project...",
+      "send": "Send Application"
+    },
+    "process": {
+      "title": "How We Work?",
+      "step1": {
+        "title": "Website Application",
+        "description": "We will contact you within 2-3 business days"
+      },
+      "step2": {
+        "title": "Consultation (1 day)",
+        "description": "We discuss details and project requirements"
+      },
+      "step3": {
+        "title": "Design & Development (1-2 months)",
+        "description": "We accompany you at every stage of development"
+      }
+    },
+    "info": {
+      "title": "Contacts",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Working Hours",
+      "hoursValue": "Mon-Sun: 9:00 - 21:00"
+    }
+  },
+  "footer": {
+    "description": "Development of modern websites and applications for business",
+    "services": "Services",
+    "servicesList": {
+      "web": "Web Development",
+      "design": "UI/UX Design",
+      "mobile": "Mobile Applications",
+      "support": "Support"
+    },
+    "contact": "Contact",
+    "workingHours": "Mon-Sun: 9:00 - 21:00",
+    "social": "Social Media",
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}
